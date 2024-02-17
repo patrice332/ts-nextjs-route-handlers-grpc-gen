@@ -1,3 +1,4 @@
+load("@aspect_rules_js//js:defs.bzl", "js_binary")
 load("//toolchain/ts:defs.bzl", "ts_library")
 
 ts_library(
@@ -5,4 +6,13 @@ ts_library(
     srcs = [
         "hello.ts",
     ],
+    deps = [
+        "//:node_modules/winston",
+    ],
+)
+
+js_binary(
+    name = "hello_run",
+    data = [":hello"],
+    entry_point = "hello.js",
 )
