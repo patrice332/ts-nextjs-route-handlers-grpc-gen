@@ -17,6 +17,7 @@ runtimes:
 # This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
 lint:
   enabled:
+    - actionlint@1.6.26
     - buildifier@6.4.0
     - eslint@8.56.0
     - osv-scanner@1.6.2
