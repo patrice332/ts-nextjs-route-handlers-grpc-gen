@@ -29,7 +29,7 @@ _js_proto_compile = rule(
     toolchains = [str(Label("@rules_proto_grpc//protoc:toolchain_type"))],
 )
 
-def ts_proto_library(name, protos, deps = [], **kwargs):
+def ts_proto_library(name, protos, deps = [], tags = [], **kwargs):
     adapter_name = "{}_adapter".format(name)
     _js_proto_compile(
         name = adapter_name,
@@ -41,6 +41,7 @@ def ts_proto_library(name, protos, deps = [], **kwargs):
         name = name,
         srcs = [":" + adapter_name],
         deps = ["//:node_modules/google-protobuf"] + deps,
+        tags = ["pre_lint"] + tags,
         **kwargs
     )
 
