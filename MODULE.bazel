@@ -4,10 +4,17 @@ module(
     compatibility_level = 0,
 )
 
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+bazel_dep(name = "bazel_skylib", version = "1.5.0")
+bazel_dep(name = "rules_cc", version = "0.0.9")
+bazel_dep(name = "protobuf", version = "23.1")
+bazel_dep(name = "rules_proto", version = "6.0.0-rc2")
 bazel_dep(name = "aspect_bazel_lib", version = "2.4.1")
 bazel_dep(name = "aspect_rules_js", version = "1.37.1")
 bazel_dep(name = "rules_nodejs", version = "5.8.2")
 bazel_dep(name = "aspect_rules_swc", version = "1.1.0")
+bazel_dep(name = "rules_proto_grpc", version = "5.0.0-alpha2")
 
 npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm", dev_dependency = True)
 npm.npm_translate_lock(
@@ -26,3 +33,33 @@ rules_ts_ext = use_extension(
 )
 rules_ts_ext.deps()
 use_repo(rules_ts_ext, "npm_typescript")
+
+protobuf_javascript_build_file_content = "load(\"@bazel_skylib//rules:native_binary.bzl\", \"native_binary\")\nnative_binary(name = \"protobuf_javascript\", src = \"bin/protoc-gen-js\", out = \"protoc-gen-js\", visibility = [\"//visibility:public\"])"
+
+http_archive(
+    name = "protobuf_javascript_linux_x86_64",
+    build_file_content = protobuf_javascript_build_file_content,
+    sha256 = "f46d7d9d79bdf3f32b75c9d9c7747a8793556d012613a0a2b33cfa7d0328290b",
+    url = "https://github.com/protocolbuffers/protobuf-javascript/releases/download/v3.21.2/protobuf-javascript-3.21.2-linux-x86_64.tar.gz",
+)
+
+http_archive(
+    name = "protobuf_javascript_linux_arm64",
+    build_file_content = protobuf_javascript_build_file_content,
+    sha256 = "ae282a812cd0aa16531e48a2242f1b53fb2cd0bc65c42ac5f0d3b18617d5458d",
+    url = "https://github.com/protocolbuffers/protobuf-javascript/releases/download/v3.21.2/protobuf-javascript-3.21.2-linux-aarch_64.tar.gz",
+)
+
+http_archive(
+    name = "protobuf_javascript_darwin_x86_64",
+    build_file_content = protobuf_javascript_build_file_content,
+    sha256 = "5bb3ec727a0f50e78b8f1e1d792bf55840773818d9a231013b802009a76998da",
+    url = "https://github.com/protocolbuffers/protobuf-javascript/releases/download/v3.21.2/protobuf-javascript-3.21.2-osx-x86_64.tar.gz",
+)
+
+http_archive(
+    name = "protobuf_javascript_darwin_arm64",
+    build_file_content = protobuf_javascript_build_file_content,
+    sha256 = "b6c75146e6037a3fe524a5c763421fd894f5c8177e2e41d6e811fff9b4876e22",
+    url = "https://github.com/protocolbuffers/protobuf-javascript/releases/download/v3.21.2/protobuf-javascript-3.21.2-osx-aarch_64.tar.gz",
+)

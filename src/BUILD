@@ -8,6 +8,7 @@ ts_library(
     ],
     deps = [
         "//:node_modules/winston",
+        "//third_party:compiler_plugin_ts_proto",
     ],
 )
 
