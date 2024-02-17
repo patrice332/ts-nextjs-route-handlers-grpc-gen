@@ -2,10 +2,10 @@
   "root": true,
   "extends": [
     "eslint:recommended",
+    "airbnb",
     "plugin:@typescript-eslint/recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
-    "plugin:node/recommended",
     "prettier"
   ]
 }
