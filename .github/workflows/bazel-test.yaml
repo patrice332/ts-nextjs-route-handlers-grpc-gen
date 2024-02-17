@@ -1,0 +1,20 @@
+name: Pull Request
+on: [pull_request]
+
+permissions: {}
+
+jobs:
+  bazel_test:
+    name: Bazel test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup bazel
+        uses: bazelbuild/setup-bazelisk@v3
+
+      - name: Test
+        shell: bash
+        run: bazel test --config ci //...
