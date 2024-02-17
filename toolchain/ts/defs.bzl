@@ -41,7 +41,7 @@ def ts_proto_library(name, protos, deps = [], tags = [], **kwargs):
         name = name,
         srcs = [":" + adapter_name],
         deps = ["//:node_modules/google-protobuf"] + deps,
-        tags = ["pre_lint"] + tags,
+        tags = ["pre-lint"] + tags,
         **kwargs
     )
 
