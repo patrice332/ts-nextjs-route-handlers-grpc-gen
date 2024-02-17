@@ -10,3 +10,7 @@ startup --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1
 build --@aspect_rules_ts//ts:skipLibCheck=always
 fetch --@aspect_rules_ts//ts:skipLibCheck=always
 query --@aspect_rules_ts//ts:skipLibCheck=always
+
+common:ci --show_progress_rate_limit=10 
+common:ci --noshow_loading_progress 
+test:ci --keep_going
